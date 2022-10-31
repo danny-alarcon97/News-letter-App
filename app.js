@@ -44,6 +44,12 @@ app.post("/", function (req, res) {
 
   //host data to external resource
   const request = https.request(url, options, function (response) {
+    if (response.statusCode === 200) {
+      res.sendFile(__dirname + "/html/success.html");
+    } else {
+      res.sendFile(__dirname + "/html/failure.html");
+    }
+
     response.on("data", function (data) {
       console.log(JSON.parse(data));
     });
@@ -51,6 +57,10 @@ app.post("/", function (req, res) {
 
   request.write(jsonData);
   request.end();
+});
+
+app.post("/failure", function (req, res) {
+  res.redirect("/");
 });
 
 app.listen(port, function () {
