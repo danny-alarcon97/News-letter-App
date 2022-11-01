@@ -63,8 +63,8 @@ app.post("/failure", function (req, res) {
   res.redirect("/");
 });
 
-app.listen(port, function () {
-  console.log(`Server is running on port ${port}`);
+app.listen(process.env.PORT || port, function () {
+  console.log(`Server is running`);
 });
 
 // mailchimp API key
